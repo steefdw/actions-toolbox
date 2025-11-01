@@ -17,5 +17,5 @@ done
 
 [ ! -d ./mise ] && mkdir mise && echo "created mise folder" || echo "mise folder found"
 
-docker build -t actions-tookbox .
+docker build -t actions-tookbox -f ./build/Dockerfile .
 docker run -it --rm -v ./mise:/mise -v ./mise.toml:/mise.toml actions-tookbox mise install

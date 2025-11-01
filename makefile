@@ -1,8 +1,9 @@
 DOCKER_COMMAND = docker run -it --rm -v ./mise:/mise -v ./mise.toml:/mise.toml actions-tookbox
 
 ## Build the docker container
+.PHONY: build
 build:
-	docker build -t actions-tookbox .
+	docker build -t actions-tookbox -f ./build/Dockerfile .
 	@[ ! -f ./mise.toml ] && cp mise.toml.example mise.toml && echo 'created default mise.toml config file' || true
 	${DOCKER_COMMAND} sh -c 'mise install'
 
