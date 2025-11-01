@@ -1,0 +1,27 @@
+name: "Actions Toolbox"
+description: "Create a Docker container with user-defined CLI tools pre-installed for flexible CI/CD automation."
+author: "steefdw"
+branding:
+  icon: "tool"
+  color: "blue"
+
+inputs:
+  tools:
+    description: >
+      A list of tools and versions to install inside the container.
+      Example:
+      ```
+      tools: |
+        yamllint: latest
+        markdownlint-cli2: v1.2.3
+      ```
+    required: true
+  foo:
+    description: "just testing"
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - run: bash ./build.sh "${{ inputs.tools }}"  "${{ inputs.foo }}"
+      shell: bash
