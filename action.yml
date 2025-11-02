@@ -2,7 +2,7 @@ name: "Actions Toolbox"
 description: "Create a Docker container with user-defined CLI tools pre-installed for flexible CI/CD automation."
 author: "steefdw"
 branding:
-  icon: "tool"
+  icon: "box"
   color: "blue"
 
 inputs:
@@ -23,5 +23,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: bash ./build.sh "${{ inputs.tools }}"  "${{ inputs.foo }}"
+    - name: "building container"
+      run: bash "${{ github.action_path }}/build.sh" "${{ inputs.tools }}" "${{ inputs.foo }}"
       shell: bash
