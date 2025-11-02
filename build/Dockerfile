@@ -25,3 +25,5 @@ RUN curl https://mise.run | sh
 #script: |
 #  ./bin/mise install
 #  ./bin/mise x -- npm test
+
+RUN addgroup -g 1000 -S toolgroup && adduser -u 1000 -S -G toolgroup tooluser
