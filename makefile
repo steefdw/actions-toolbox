@@ -13,4 +13,5 @@ run:
 
 ## Generate a bootstrapped mise
 bootstrap:
-	${DOCKER_COMMAND} mise generate bootstrap -l -w && mv ./bin/mise ./mise/mise-bootstrapped
+	${DOCKER_COMMAND} mise generate bootstrap -l > ./mise/mise-bootstrapped
+	mv ./mise/mise-bootstrapped ./build/mise
