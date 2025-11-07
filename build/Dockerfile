@@ -5,6 +5,14 @@ RUN apt-get update  \
         sudo curl git ca-certificates build-essential \
     && rm -rf /var/lib/apt/lists/*
 
+ARG USERNAME=toolbox
+ARG USER_UID=1000
+ARG USER_GID=1000
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV MISE_DATA_DIR="/mise"
 ENV MISE_CONFIG_DIR="/mise"
@@ -26,4 +34,4 @@ RUN curl https://mise.run | sh
 #  ./bin/mise install
 #  ./bin/mise x -- npm test
 
-RUN addgroup -g 1000 -S toolgroup && adduser -u 1000 -S -G toolgroup tooluser
+USER $USERNAME
